@@ -11,15 +11,15 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("tranthin/cicd-jenkins")
+       sh 'docker build -t tranthin/cicd-jenkins .'
     }
 
-    stage('Push image') {
-        
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("12325")
+     stage('Push to Docker Hub') {
+            steps {
+                //Đẩy ảnh Docker lên Docker Hub
+                sh 'docker push tranthin/cicd-jenkins'
+            }
         }
-    }
 
     stage('Test image') {
             sh 'echo "Tests passed"'
