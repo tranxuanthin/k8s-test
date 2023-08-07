@@ -4,7 +4,9 @@ node {
     stage('Clone repository') {
       
 
-        checkout scm
+        app.inside {
+            sh 'echo "Task starts"'
+        }
     }
 
     stage('Build image') {
