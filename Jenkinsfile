@@ -4,7 +4,7 @@ node {
     stage('Clone repository') {
       
 
-   
+            checkout scm
             sh 'echo "Task starts"'
         
     }
@@ -14,12 +14,15 @@ node {
        app = docker.build("tranthin/cicd-jenkins")
     }
 
-    stage('Test image') {
-  
-
-        app.inside {
-            sh 'echo "Tests passed"'
+    stage('Push image') {
+        
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("12325")
         }
     }
+
+    stage('Test image') {
+            sh 'echo "Tests passed"'
+        }
 
 }
