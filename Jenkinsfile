@@ -4,9 +4,9 @@ node {
     stage('Clone repository') {
       
 
-        app.inside {
+   
             sh 'echo "Task starts"'
-        }
+        
     }
 
     stage('Build image') {
